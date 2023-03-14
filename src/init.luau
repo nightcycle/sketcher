@@ -301,7 +301,7 @@ function Sketcher:SetLine(start: Vector3, finish: Vector3, color: Color3?, diame
 	part.Shape = Enum.PartType.Cylinder
 	part.Name = "SketcherVector"
 	part.Size = Vector3.new(dist, diameter, diameter)
-	part.CFrame = CFrame.new(start, finish) * CFrame.new(0,0,dist) * CFrame.Angles(0,math.rad(90),0)
+	part.CFrame = CFrame.new(start, finish) * CFrame.new(0,0,-dist/2) * CFrame.Angles(0,math.rad(90),0)
 	part.Transparency = transparency
 	part.Color = color
 	part.Anchored = true
@@ -311,6 +311,10 @@ function Sketcher:SetLine(start: Vector3, finish: Vector3, color: Color3?, diame
 	part.Locked = true
 	part.Archivable = false
 	part.Parent = workspace.CurrentCamera
+
+	if part.Transparency == 0 then
+		self:SetHighlight(part, color, transparency, false, true)
+	end
 
 	return function(begin: Vector3, finish: Vector3)
 		local mag = (start - finish).Magnitude
@@ -349,6 +353,11 @@ function Sketcher:SetPoint(origin: Vector3, color: Color3?, diameter: number?, t
 	part.Locked = true
 	part.Archivable = false
 	part.Parent = workspace.CurrentCamera
+
+	if part.Transparency == 0 then
+		self:SetHighlight(part, color, transparency, false, true)
+	end
+
 
 	return function(pos: Vector3)
 		part.Position = pos
