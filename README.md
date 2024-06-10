@@ -1,2 +1,2 @@
-# package
-A basic template for whenever I make a wally package
+# sketcher
+Quenty's draw package with built in clean-up
